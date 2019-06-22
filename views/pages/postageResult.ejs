@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name ="author" content="Wendi Van Sickle">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="../stylesheets/bootstrap.css" type="text/css" rel="stylesheet" media="screen"/> 
+      <script src="javascript/javascript.js"></script>
+      <title>Postage</title>
+   </head>  
+   <body>
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+         <h1 class="display-4">Your Postage Cost</h1>
+      </div>
+
+      <div class="container">
+         <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+               <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">You entered..</h4>
+               </div>
+               <div class="card-body">
+                  <h2 class="card-title pricing-card-title">Weight: <small class="text-muted"><%= ounces %> ounces</small></h2>
+                  <hr>
+                  <h2 class="card-title pricing-card-title">Service: <small class="text-muted"><%= service %></small></h2>
+               </div>
+            </div>
+
+            <div class="card mb-4 shadow-sm">
+               <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">The calculated postage is..</h4>
+               </div>
+               <div class="card-body">
+                  <h2 class="card-title pricing-card-title">$<%= result %></h2>
+                  <hr>
+                  <h2 class="card-title pricing-card-title">Have a nice day. <small class="text-muted"><%= service %></small></h2>
+               </div>
+            </div>     
+
+         </div>
+      </div>
+   </body>
+</html>
