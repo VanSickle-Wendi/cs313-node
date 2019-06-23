@@ -9,8 +9,8 @@ $(document).ready(function () {
         $.get('/postage_service', {
                 'ounces' : ounces,
                 'service' : service
-            } , function(data2){
-                $("#ajax_results2").text(data2.result);
+            } , function(data){
+                $("#ajax_results2").text(data.result);
             }, 'json'
         );
     })
