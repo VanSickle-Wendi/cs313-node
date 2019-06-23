@@ -32,6 +32,17 @@ express()
     res.end();
 
   })
+    .get('/postage_service', function (req, res) {
+    var ounces = req.query.ounces;
+    var service = req.query.service;
+    var result = { result: calculateRateAjax(service, ounces) };
+    var stringify = JSON.stringify(result);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.write(stringify);
+    res.end();
+
+  })
+  
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
   
 
@@ -57,74 +68,136 @@ function handlePostage(request, response) {
 
 	// TODO: Here we should check to make sure we have all the correct parameters
 
-	calcPostage(response, service, ounces);
-} 
+	calculateRate(response, service, ounces);
+}
 
-
-
-function calcPostage(response, serv, oz) {
+function calculateRate(response, service, ounces) {
 
 	let result = 0;
       
-   	if (serv === "Letters (Stamped)" && oz <= 1) {
+   	if (service === "Letters (Stamped)" && ounces <= 1) {
          result = .55;
-      }else if (serv === "Letters (Stamped)" && oz <= 2) {
+      }else if (service === "Letters (Stamped)" && ounces <= 2) {
          result = .70;
-      }else if (serv === "Letters (Stamped)" && oz <= 3) {
+      }else if (service === "Letters (Stamped)" && ounces <= 3) {
          result = .85;
-      }else if (serv === "Letters (Stamped)" && oz <= 3.5) {
+      }else if (service === "Letters (Stamped)" && ounces <= 3.5) {
          result = 1;
-      }else if (serv === "Letters(Metered)" && oz <= 1) {
+      }else if (service === "Letters(Metered)" && ounces <= 1) {
          result = .50;
-      }else if (serv === "Letters(Metered)" && oz <= 2) {
+      }else if (service === "Letters(Metered)" && ounces <= 2) {
          result = .65; 
-      }else if (serv === "Letters(Metered)" && oz <= 3) {
+      }else if (service === "Letters(Metered)" && ounces <= 3) {
          result = .80;
-      }else if (serv === "Letters(Metered)" && oz <= 3.5) {
+      }else if (service === "Letters(Metered)" && ounces <= 3.5) {
          result = .95;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 1) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 1) {
          result = 1;          
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 2) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 2) {
          result = 1.15;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 3) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 3) {
          result = 1.30;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 4) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 4) {
          result = 1.45;
-      }else if (serv === "largeEnvFlats" && oz <= 5) {
+      }else if (service === "largeEnvFlats" && ounces <= 5) {
          result = 1.60;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 6) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 6) {
          result = 1.75;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 7) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 7) {
          result = 1.90;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 8) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 8) {
          result = 2.05;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 9) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 9) {
          result = 2.20;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 10) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 10) {
          result = 2.35;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 11) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 11) {
          result = 2.50;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 12) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 12) {
          result = 2.65;
-      }else if (serv === "Large Envelopes(Flats)" && oz <= 13) {
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 13) {
          result = 2.80;  
-      }else if (serv === "First-Class Package" && oz <= 4) {
+      }else if (service === "First-Class Package" && ounces <= 4) {
          result = 3.66;          
-      }else if (serv === "First-Class Package" && oz <= 8) {
+      }else if (service === "First-Class Package" && ounces <= 8) {
          result = 4.39;
-      }else if (serv === "First-Class Package" && oz <= 12) {
+      }else if (service === "First-Class Package" && ounces <= 12) {
          result = 5.19;
-      }else if (serv === "First-Class Package" && oz <= 13) {
+      }else if (service === "First-Class Package" && ounces <= 13) {
          result = 5.71;          
       } else {
-         result = "Your package is too heavy for these services.";
+         result = "0 Your package is too heavy for these services.";
 	}   
 
 	// Set up a JSON object of the values we want to pass along to the EJS result page
-	const params = {service: serv, ounces: oz, result: result};
+	const params = {service: service, ounces: ounces, result: result};
 
 	// Render the response, using the EJS page "result.ejs" in the pages directory
 	// Makes sure to pass it the parameters we need.
 	response.render('pages/postageResult', params);
+
+
+}
+
+function calculateRateAjax(service, ounces) {
+
+	let result = 0;
+      
+   	if (service === "Letters (Stamped)" && ounces <= 1) {
+         result = .55;
+      }else if (service === "Letters (Stamped)" && ounces <= 2) {
+         result = .70;
+      }else if (service === "Letters (Stamped)" && ounces <= 3) {
+         result = .85;
+      }else if (service === "Letters (Stamped)" && ounces <= 3.5) {
+         result = 1;
+      }else if (service === "Letters(Metered)" && ounces <= 1) {
+         result = .50;
+      }else if (service === "Letters(Metered)" && ounces <= 2) {
+         result = .65; 
+      }else if (service === "Letters(Metered)" && ounces <= 3) {
+         result = .80;
+      }else if (service === "Letters(Metered)" && ounces <= 3.5) {
+         result = .95;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 1) {
+         result = 1;          
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 2) {
+         result = 1.15;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 3) {
+         result = 1.30;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 4) {
+         result = 1.45;
+      }else if (service === "largeEnvFlats" && ounces <= 5) {
+         result = 1.60;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 6) {
+         result = 1.75;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 7) {
+         result = 1.90;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 8) {
+         result = 2.05;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 9) {
+         result = 2.20;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 10) {
+         result = 2.35;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 11) {
+         result = 2.50;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 12) {
+         result = 2.65;
+      }else if (service === "Large Envelopes(Flats)" && ounces <= 13) {
+         result = 2.80;  
+      }else if (service === "First-Class Package" && ounces <= 4) {
+         result = 3.66;          
+      }else if (service === "First-Class Package" && ounces <= 8) {
+         result = 4.39;
+      }else if (service === "First-Class Package" && ounces <= 12) {
+         result = 5.19;
+      }else if (service === "First-Class Package" && ounces <= 13) {
+         result = 5.71;          
+      } else {
+         result = "0 Your package is too heavy for these services.";
+	}   
+
+      return "Your purchase price is $" + result;
+
 
 }

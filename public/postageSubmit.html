@@ -5,82 +5,86 @@
       <meta name ="author" content="Wendi Van Sickle">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="../stylesheets/bootstrap.css" type="text/css" rel="stylesheet" media="screen"/> 
-      <script src="javascript/javascript.js"></script>
+      <link href="../stylesheets/my_css.css" type="text/css" rel="stylesheet" media="screen"/> 
       <title>My Home Page</title>
    </head>   
-    <body>
-     
+   <body>
 
 
-       
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Calculate Your Postage</h1>
-</div>
-       
-<div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Postage Calculator</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">Enter a weight <small class="text-muted">up to 13oz.</small></h1>
-      <form action="/postage" method="GET">
-        <ul class="list-unstyled mt-3 mb-4">
-          <li><input type="number" name="ounces" id="ounces"><br></li>
-          <li><hr></li>
-          <li><h1 class="card-title pricing-card-title">Choose a service <small class="text-muted"></small></h1></li>
-          <li><select name="service" id="service">
-                <option value="Letters (Stamped)">Letters(Stamped) Up to 3.5oz</option>
-                <option value="Letters(Metered)">Letters(Metered) Up to 3.5oz</option>
-                <option value="Large Envelopes(Flats)">Large Envelopes(Flats) Up to 13oz</option>
-                <option value="First-Class Package">First-Class Package Up to 13oz</option>
-             </select></li> 
-             <li><hr></li>
-        </ul>
-        
-        <input type="submit" class="btn btn-lg btn-block btn-primary" value="Postage">
-      </form>
-      </div>
-    </div>
 
-     
-     
-     
-     
-     
-     
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Pro</h4>
+
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+         <h1 class="display-4">Calculate Your Postage</h1>
       </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>20 users included</li>
-          <li>10 GB of storage</li>
-          <li>Priority email support</li>
-          <li>Help center access</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+
+      <div class="container">
+         <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+               <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Postage Calculator</h4>
+               </div>
+               <div class="card-body">
+                  
+                  <form action="/postage" method="GET">
+                     <h1 class="card-title pricing-card-title">Enter a weight <small class="text-muted">up to 13oz.</small></h1>
+                     <ul class="list-unstyled mt-3 mb-4">
+                        <li><input type="number" name="ounces" id="ounces"><br></li>
+                        <li><hr></li>
+                        <li><h1 class="card-title pricing-card-title">Choose a service <small class="text-muted"></small></h1></li>
+                        <li><select name="service" id="service">
+                              <option value="Letters (Stamped)">Letters(Stamped) Up to 3.5oz</option>
+                              <option value="Letters(Metered)">Letters(Metered) Up to 3.5oz</option>
+                              <option value="Large Envelopes(Flats)">Large Envelopes(Flats) Up to 13oz</option>
+                              <option value="First-Class Package">First-Class Package Up to 13oz</option>
+                           </select></li> 
+                        <li><hr></li>
+                     </ul>
+
+                     <input type="submit" class="btn btn-lg btn-block btn-primary" value="Postage">
+                  </form>
+               </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="card mb-4 shadow-sm">
+               <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Ajax Result</h4>
+               </div>
+               <div class="card-body">
+
+
+                  <form class="form_topMargin">
+                  <ul class="list-unstyled mt-3 mb-4" id="ajax_results2">
+                     
+                     <h1 class="card-title pricing-card-title">Enter a weight <small class="text-muted">up to 13oz.</small></h1>
+                     <li><input type="number" name="ounces" id="ounces" class="input_bottomMargin"></li><br><br>
+
+                        <li><h1 class="card-title pricing-card-title" class="input_bottomMargin" >Choose a service <small class="text-muted"></small></h1></li>
+                        <li><select name="service" id="service" class="input_bottomMargin">
+                              <option value="Letters (Stamped)">Letters(Stamped) Up to 3.5oz</option>
+                              <option value="Letters(Metered)">Letters(Metered) Up to 3.5oz</option>
+                              <option value="Large Envelopes(Flats)">Large Envelopes(Flats) Up to 13oz</option>
+                              <option value="First-Class Package">First-Class Package Up to 13oz</option>
+                           </select></li> 
+                        <li><hr></li>                     
+
+                  </ul>
+                  </form>
+                  <button class="btn btn-lg btn-block btn-primary" id="myButton2" >Ajax Button</button>
+               </div>
+            </div>
+
+         </div>
       </div>
-    </div>
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Enterprise</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>30 users included</li>
-          <li>15 GB of storage</li>
-          <li>Phone and email support</li>
-          <li>Help center access</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
-      </div>
-    </div>
-  </div>
-</div>
-    </body>
+      <script
+         src="https://code.jquery.com/jquery-3.4.1.min.js"
+         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+      <script src="postage.js"></script>
+   </body>
 </html>
